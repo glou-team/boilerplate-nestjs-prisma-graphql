@@ -4,6 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
+import { UsersModule } from './users/users.module';
 
 // import { PrismaModule } from './prisma.module';
 
@@ -15,6 +16,8 @@ import { AppController } from './app.controller';
       debug: false,
       playground: true,
     }),
+
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
