@@ -3,6 +3,8 @@ import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
+import { UseGuards } from '@nestjs/common';
+import { GqlAuthGuard } from 'src/auth/auth.guard';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -13,13 +15,14 @@ export class UsersResolver {
     return this.usersService.create(createUserInput);
   }
 
+  @UseGuards(GqlAuthGuard)
   @Query(() => [User], { name: 'users' })
   findAll() {
     return this.usersService.findAll();
   }
 
   @Query(() => User, { name: 'user' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  findOne(@Args('id', { type: () => String }) id: string) {
     return this.usersService.findOne(id);
   }
 
