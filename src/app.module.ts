@@ -7,6 +7,9 @@ import { AppController } from './app.controller';
 import { UsersModule } from './users/users.module';
 
 import { AuthModule } from './auth/auth.module';
+import { CustomersModule } from './customers/customers.module';
+import { FidelityCardProgramsModule } from './fidelity-card-programs/fidelity-card-programs.module';
+import { StampsModule } from './stamps/stamps.module';
 
 @Module({
   imports: [
@@ -20,6 +23,12 @@ import { AuthModule } from './auth/auth.module';
     UsersModule,
 
     AuthModule,
+
+    CustomersModule,
+
+    FidelityCardProgramsModule,
+
+    StampsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

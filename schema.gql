@@ -12,9 +12,30 @@ type AuthType {
   token: String!
 }
 
+type Customer {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type FidelityCardProgram {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Stamp {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
   users: [User!]!
   user(id: String!): User!
+  customers: [Customer!]!
+  customer(id: Int!): Customer!
+  fidelityCardPrograms: [FidelityCardProgram!]!
+  fidelityCardProgram(id: Int!): FidelityCardProgram!
+  stamps: [Stamp!]!
+  stamp(id: Int!): Stamp!
 }
 
 type Mutation {
@@ -22,17 +43,32 @@ type Mutation {
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(id: Int!): User!
   login(data: AuthInput!): AuthType!
+  createCustomer(createCustomerInput: CreateCustomerInput!): Customer!
+  updateCustomer(updateCustomerInput: UpdateCustomerInput!): Customer!
+  removeCustomer(id: Int!): Customer!
+  createFidelityCardProgram(createFidelityCardProgramInput: CreateFidelityCardProgramInput!): FidelityCardProgram!
+  updateFidelityCardProgram(updateFidelityCardProgramInput: UpdateFidelityCardProgramInput!): FidelityCardProgram!
+  removeFidelityCardProgram(id: Int!): FidelityCardProgram!
+  createStamp(createStampInput: CreateStampInput!): Stamp!
+  updateStamp(updateStampInput: UpdateStampInput!): Stamp!
+  removeStamp(id: Int!): Stamp!
 }
 
 input CreateUserInput {
   """User's email"""
   email: String!
+
+  """User's name"""
+  name: String!
   password: String!
 }
 
 input UpdateUserInput {
   """User's email"""
   email: String
+
+  """User's name"""
+  name: String
   password: String
   id: Int!
 }
@@ -40,4 +76,37 @@ input UpdateUserInput {
 input AuthInput {
   email: String!
   password: String!
+}
+
+input CreateCustomerInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateCustomerInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateFidelityCardProgramInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateFidelityCardProgramInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateStampInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateStampInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }

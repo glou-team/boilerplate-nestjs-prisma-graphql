@@ -12,11 +12,71 @@ datasource db {
 
 model User {
   id       String @id @default(cuid())
+  name     String
   email    String @unique
   password String
+
+  customers              UsersOnCustomers[]
+  fidelity_card_programs FidelityCardProgram[]
 
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
   @@map("users")
+}
+
+model Customer {
+  id    String @id @default(cuid())
+  phone String @unique
+  name  String
+
+  users  UsersOnCustomers[]
+  stamps Stamp[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("customers")
+}
+
+model UsersOnCustomers {
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  customer   Customer @relation(fields: [customerId], references: [id])
+  customerId String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@id([userId])
+}
+
+model FidelityCardProgram {
+  id                 String @id @default(cuid())
+  name               String
+  description        String
+  stamps_to_complete Int
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  stamps Stamp[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("fidelity_card_programs")
+}
+
+model Stamp {
+  fidelity_card_program FidelityCardProgram @relation(fields: [fidelityCardProgramId], references: [id])
+  fidelityCardProgramId String
+
+  customer   Customer @relation(fields: [customerId], references: [id])
+  customerId String
+
+
+  @@id([fidelityCardProgramId, customerId])
+  @@map("stamps")
 }
